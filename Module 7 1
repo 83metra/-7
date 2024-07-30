@@ -24,8 +24,9 @@ class Shop:
                 print(f'Продукт {product.name} уже есть в магазине.')
             else:
                 self.file_append.write(f'{product.name}, {product.weight}, {product.category}\n')
-                self.file_append.tell() # если убрать эту строку, то перестаёт работать исключение. Добавляется уже существующее в файле имя...
-        self.file_append.close()
+                # self.file_append.tell() # если убрать эту строку, то перестаёт работать исключение. Добавляется уже существующее в файле имя...
+                self.file_append.seek(0) # без этой строки, но со строкой 27 тоже работает.
+self.file_append.close()
 
 
 s1 = Shop()
