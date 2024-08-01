@@ -10,4 +10,4 @@ Module 7 3.py: Домашнее задание по теме "Оператор "
                Monday's child.txt
                Walt Whitman - O Captain! My Captain!.txt
 
-
+Module 7 4.py: Домашнее задание по теме "Форматирование строк".
