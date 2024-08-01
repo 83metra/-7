@@ -1,0 +1,63 @@
+class WordsFinder:
+    def __init__(self, *filenames):
+        self.filenames = []
+        for filename in filenames:
+            self.filenames.append(filename)
+
+    def get_all_words(self):
+        self.all_words = {}
+        for filename in self.filenames:
+            with open(filename, encoding= 'utf-8') as file:
+                words = []
+                for line in file:
+                    words.extend(line.lower().replace('\n', '').replace(',', '')
+                    .replace('.', '').replace('=', '')
+                    .replace('!', '').replace( '?', '').replace(';', '')
+                    .replace(':', '').replace('- ', '').split())
+                    self.all_words.update({filename : words})
+        return self.all_words
+
+    def count(self, word):
+        self.count_dict = {}
+        for name, words in self.get_all_words().items():
+            number_count = 0
+            for element in words:
+                if word.lower() == element:
+                    number_count += 1
+            self.count_dict.update({name : number_count})
+        return self.count_dict
+
+    def find(self, word):
+        self.find_dict = {}
+        for key in self.get_all_words(): # перебор по ключу
+            find_count = 0
+            for element in self.all_words[key]: # перебор значений по ключу, указанному циклом выше
+                find_count += 1
+                if word.lower() == element:
+                    self.find_dict.update({key: find_count})
+                    break
+        return self.find_dict
+
+
+
+
+
+finder2 = WordsFinder('test_file.txt')
+print(finder2.get_all_words()) # Все слова
+print(finder2.find('TEXT')) # 3 слово по счёту
+print(finder2.count('teXT')) # 4 слова teXT в тексте всего
+
+#finder3 = WordsFinder('Rudyard Kipling - if.txt')
+#print(finder3.get_all_words())
+#print(finder3.find('iF'))
+#print(finder3.count('If'))
+
+#finder4 = WordsFinder("Monday's child.txt")
+#print(finder4.get_all_words())
+#print(finder4.find('ChIld'))
+#print(finder4.count('cHilD'))
+
+finder1 = WordsFinder('Walt Whitman - O Captain! My Captain!.txt')
+print(finder1.get_all_words())
+print(finder1.find('captain'))
+print(finder1.count('captain'))
