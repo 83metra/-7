@@ -1,0 +1,11 @@
+import os, time
+
+for root, dirs, files in os.walk('.'):
+    for file in files:
+        filepath = os.path.join(os.path.abspath('.'), file)
+        filetime = os.path.getatime(file)
+        formatted_time = time.strftime("%d.%m.%Y %H:%M", time.localtime(filetime))
+        filesize = os.stat(file).st_size
+        parent_dir = os.path.dirname(filepath)
+        print(f'\033[32mОбнаружен файл: "{file}"\033[0m\n\t\tПуть: {filepath}\n\t\tРазмер: {filesize} байт.\n\t\t'
+              f'Время изменения: {formatted_time}\n\t\tРодительская директория: {parent_dir}\n')
